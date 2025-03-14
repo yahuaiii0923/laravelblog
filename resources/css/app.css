@@ -4,12 +4,32 @@
 
 @import "tailwindcss/utilities";
 
-.background-image 
-{
-    background-image: url('https://cdn.pixabay.com/photo/2017/07/31/23/45/pen-2562078_960_720.jpg');
+.background-image {
+    background-image: url('https://hips.hearstapps.com/hmg-prod/images/mhcomics-landingpage-lead-6659f1a3c2a2d.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     height: 600px;
+}
+
+/* COMIC IMAGE GALLERY CSS */
+.comic-gallery {
+    width: 85%;
+    margin: auto;
+}
+
+.comic-gallery .comic-container {
+    width: 250px;
+    height: 600px;
+}
+
+.comic-gallery .comic-container .comic-image {
+    width: inherit;
+    height: auto;
+    flex: 0 0 auto;
+}
+
+.comic-gallery .comic-container .comic-info {
+    padding: 18px 0;
 }

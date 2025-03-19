@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\Comment;
 
 class Post extends Model
 {
@@ -18,12 +19,17 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()  // Corrected the method name from 'comment' to 'comments' for plural consistency
+    {
+        return $this->hasMany(Comment::class);  // Correct relationship definition
+    }
+
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 }

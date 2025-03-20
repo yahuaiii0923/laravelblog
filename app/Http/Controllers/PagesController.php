@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function index()
-    {
-        return view('index');
-    }
+        {
+            $posts = Post::latest()->take(2)->get();
+            return view('main', compact('posts'));
+        }
 
    public function listing()
    {

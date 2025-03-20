@@ -16,19 +16,23 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
-Route::resource('blog', PostsController::class);
-Route::post('/blog', [BlogController::class, 'store']);
-Route::get('/blog/{slug}', [PostsController::class, 'show'])->name('posts.show');
-//Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+// Main Pages
+Route::get('/', [PagesController::class, 'index'])->name('home');
 Route::get('/listing', [PagesController::class, 'listing'])->name('listing');
 
-Route::get('/', [PagesController::class, 'index']);
-Route::resource('/blog', PostsController::class);
+// Blog Routes
+Route::prefix('blog')->group(function () {
+    Route::get('/', [PostsController::class, 'index'])->name('blog.index');
+    Route::get('/create', [PostsController::class, 'create'])->name('blog.create');
+    Route::post('/', [PostsController::class, 'store'])->name('blog.store');
+    Route::get('/{slug}', [PostsController::class, 'show'])->name('posts.show');
+    Route::get('/{slug}/edit', [PostsController::class, 'edit'])->name('blog.edit');
+    Route::put('/{slug}', [PostsController::class, 'update'])->name('blog.update');
+    Route::delete('/{slug}', [PostsController::class, 'destroy'])->name('blog.destroy');
+});
 
+// Comments
+Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+
+// Authentication
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Auth::routes();
-
-Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

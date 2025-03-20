@@ -70,11 +70,15 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
-    {
-        return view('blog.show')
-            ->with('post', Post::where('slug', $slug)->first());
-    }
+    // Show a single blog post
+        public function show($slug)
+        {
+            // Find the post by its slug
+            $post = Post::where('slug', $slug)->firstOrFail();
+
+            // Pass the post to the view
+            return view('blog.show', compact('post'));
+        }
 
     /**
      * Show the form for editing the specified resource.

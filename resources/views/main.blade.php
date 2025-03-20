@@ -26,49 +26,49 @@
         <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">Featured Collections</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://www.jellycat.com/media/wysiwyg/bashful-collection.jpg" alt="Bashful Collection" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-softblue mb-2">Bashful Friends</h3>
-                    <p class="text-gray-600">Our iconic collection of soft, floppy-eared companions</p>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://www.jellycat.com/media/wysiwyg/amuseables-collection.jpg" alt="Amuseables" class="w-full h-64 object-cover">
+                <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/original/image-manager/amuseables-storm-cloud-bag-pink-orchid-flower-shop-card-carousel.jpg?t=1741701802" alt="Amuseables" class="w-full h-64 object-cover">
                 <div class="p-6">
                     <h3 class="text-xl font-semibold text-softblue mb-2">Amuseables</h3>
                     <p class="text-gray-600">Whimsical characters that bring everyday objects to life</p>
                 </div>
             </div>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="https://www.jellycat.com/media/wysiwyg/dragon-collection.jpg" alt="Dragons" class="w-full h-64 object-cover">
+                            <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/1920w/image-manager/blossom-bunnies-shopping-desktop.jpg?t=1736871459" alt="Bashful Collection" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-softblue mb-2">Bashful Bunnies</h3>
+                                <p class="text-gray-600">Our iconic collection of soft, floppy-eared companions</p>
+                            </div>
+                        </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/original/image-manager/mooliet-cow-cafe-ss25-card-carousel.jpg?t=1741701838" alt="25 Anniversary" class="w-full h-64 object-cover">
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold text-softblue mb-2">Magical Dragons</h3>
-                    <p class="text-gray-600">Spark imagination with our mythical creatures</p>
+                    <h3 class="text-xl font-semibold text-softblue mb-2">Fuddlewuddle Friends</h3>
+                    <p class="text-gray-600">A delightfully textured collection of cuddly friends with the softest, rippled fur.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Latest Blog Posts -->
-    <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-blue-50">
+    <!-- Latest Blog Posts Section -->
+    <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-gray-50">
         <h2 class="text-3xl font-semibold text-coral text-center mb-6">Latest Blog Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @forelse($posts ?? [] as $post)
-                <a href="/blog/{{ $post->slug }}" class="block bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300 group">
-                    <div class="h-48 w-full overflow-hidden">
-                        <img src="{{ $post->image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-softblue group-hover:text-teal-600 transition-colors">{{ $post->title }}</h3>
-                        <p class="text-gray-600 mt-2">{{ Str::limit($post->excerpt, 120) }}</p>
-                        <div class="mt-4 inline-block text-mint underline group-hover:text-teal-600 transition-colors">Read More</div>
-                    </div>
-                </a>
-            @empty
-                <div class="col-span-2 text-center text-gray-600">
-                    No blog posts available.
+            @foreach($posts as $post)
+            <a href="{{ route('posts.show', $post->slug) }}" class="block bg-white shadow-md rounded-3xl hover:shadow-lg transition-shadow duration-300 group">
+                <div class="h-48 w-full overflow-hidden rounded-t-3xl">
+                    <img src="{{ asset('images/' . $post->image_path) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
                 </div>
-            @endforelse
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-softblue group-hover:text-teal-600 transition-colors">
+                        {{ $post->title }}
+                    </h3>
+                    <p class="text-gray-600 mt-2">{{ Str::limit($post->excerpt, 120) }}</p>
+                    <div class="mt-4 inline-block text-mint underline group-hover:text-teal-600 transition-colors">
+                        Read More
+                    </div>
+                </div>
+            </a>
+            @endforeach
         </div>
     </div>
 

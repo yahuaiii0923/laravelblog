@@ -3,13 +3,3 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
-
-.background-image
-{
-    background-image: url('https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/1920w/image-manager/turtle-and-hare-desktop-hero-1.jpg?t=1742387440');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    height: 600px;
-}

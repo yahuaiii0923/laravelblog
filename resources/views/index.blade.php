@@ -1,100 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Hero Section -->
     <div class="background-image grid grid-cols-1 m-auto bg-blue-100">
         <div class="flex text-gray-100 pt-10">
-            <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block text-center">
+            <div class="m-auto pt-4 pb-10 sm:m-auto w-4/5 block text-left">
                 <h1 class="sm:text-white text-5xl uppercase font-bold text-shadow-md pb-14">
-                    Welcome to the Jellycat Stories!
+                    Welcome to the Jellycat World
                 </h1>
-                <a
-                    href="/blog"
-                    class="text-center text-white-700 py-2 px-4 font-bold text-xl rounded-full">
-                    Enjoy the Stories
+                <a href="/blog" class="group relative inline-flex items-center text-white font-bold text-xl py-2 px-4 rounded-full hover:scale-105 transition-all duration-300">
+                    <span>Explore Collections</span>
+                    <span class="ml-2 relative h-6 w-8 overflow-hidden">
+                        <svg class="absolute right-0 w-6 h-6 text-teal-400 transition-all duration-300 group-hover:translate-x-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                        <span class="absolute left-0 top-1/2 w-0 h-[2px] bg-teal-400 transition-all duration-300 group-hover:w-full -translate-y-1/2"></span>
+                    </span>
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-        <div>
-            <img src="https://www.jellycat.com/media/wysiwyg/jellycat-products.jpg" width="700" alt="Jellycat Collection">
-        </div>
-
-        <div class="m-auto sm:m-auto text-left w-4/5 block">
-            <h2 class="text-3xl font-extrabold text-gray-600">
-                Discover the Magic of Jellycat Toys!
-            </h2>
-
-            <p class="py-8 text-gray-500 text-s">
-                Our Jellycat collection is perfect for every age, featuring soft, cuddly, and adorable plush toys. Explore our wide range today!
-            </p>
-
-            <p class="font-extrabold text-gray-600 text-s pb-9">
-                From bunnies to bears, each Jellycat creation tells its own story of joy and comfort. Whether you're buying for yourself or a loved one, there's a toy to bring smiles and comfort.
-            </p>
-
-            <a
-                href="/blog"
-                class="uppercase bg-blue-500 text-gray-100 text-s font-extrabold py-3 px-8 rounded-3xl">
-                Learn More
-            </a>
-        </div>
-    </div>
-
-    <div class="text-center p-15 bg-blue-800 text-white">
-        <h2 class="text-2xl pb-5 text-l">
-            Our Expertise
-        </h2>
-
-        <span class="font-extrabold block text-4xl py-1">
-            Plush Toy Design
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Toy Safety Standards
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Custom Plush Creations
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Global Toy Distribution
-        </span>
-    </div>
-
-    <div class="text-center py-15">
-        <span class="uppercase text-s text-gray-400">
-            Blog
-        </span>
-
-        <h2 class="text-4xl font-bold py-10">
-            Latest Jellycat Adventures
-        </h2>
-
-        <p class="m-auto w-4/5 text-gray-500">
-            Dive into the world of Jellycat through our blog, featuring the latest collections, fun facts, and heartwarming stories from our plush family.
-        </p>
-    </div>
-
-    <div class="sm:grid grid-cols-2 w-4/5 m-auto">
-        <div class="flex bg-blue-700 text-gray-100 pt-10">
-            <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block">
-                <span class="uppercase text-xs">
-                    New Arrival
-                </span>
-
-                <h3 class="text-xl font-bold py-10">
-                    Meet the new Jellycat friends! From cuddly companions to adorable characters, these new plush toys are ready to steal your heart.
-                </h3>
-
-                <a
-                    href="/blog"
-                    class="uppercase bg-transparent border-2 border-gray-100 text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
-                    Discover Now
-                </a>
+    <!-- Featured Collections -->
+    <div class="max-w-6xl mx-auto py-12 px-4">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">Featured Collections</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://www.jellycat.com/media/wysiwyg/bashful-collection.jpg" alt="Bashful Collection" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-softblue mb-2">Bashful Friends</h3>
+                    <p class="text-gray-600">Our iconic collection of soft, floppy-eared companions</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://www.jellycat.com/media/wysiwyg/amuseables-collection.jpg" alt="Amuseables" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-softblue mb-2">Amuseables</h3>
+                    <p class="text-gray-600">Whimsical characters that bring everyday objects to life</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="https://www.jellycat.com/media/wysiwyg/dragon-collection.jpg" alt="Dragons" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-softblue mb-2">Magical Dragons</h3>
+                    <p class="text-gray-600">Spark imagination with our mythical creatures</p>
+                </div>
             </div>
         </div>
-        <div>
-            <img src="https://www.jellycat.com/media/wysiwyg/new-jellycat-toy.jpg" alt="New Jellycat Toy">
+    </div>
+
+    <!-- Latest Blog Posts -->
+    <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-blue-50">
+        <h2 class="text-3xl font-semibold text-coral text-center mb-6">Latest Blog Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @forelse($posts ?? [] as $post)
+                <a href="/blog/{{ $post->slug }}" class="block bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow duration-300 group">
+                    <div class="h-48 w-full overflow-hidden">
+                        <img src="{{ $post->image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-softblue group-hover:text-teal-600 transition-colors">{{ $post->title }}</h3>
+                        <p class="text-gray-600 mt-2">{{ Str::limit($post->excerpt, 120) }}</p>
+                        <div class="mt-4 inline-block text-mint underline group-hover:text-teal-600 transition-colors">Read More</div>
+                    </div>
+                </a>
+            @empty
+                <div class="col-span-2 text-center text-gray-600">
+                    No blog posts available.
+                </div>
+            @endforelse
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-16 mt-12">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-semibold text-teal-400">Join the Jellycat Adventure</h2>
+            <p class="mt-4 text-lg text-gray-600">Stay updated on the latest collections, blog posts, and exclusive releases by subscribing to our newsletter.</p>
+            <div class="mt-8 max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400">
+                <button class="bg-teal-400 text-white px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors duration-300">
+                    Subscribe
+                </button>
+            </div>
         </div>
     </div>
 @endsection

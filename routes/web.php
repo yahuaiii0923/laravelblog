@@ -16,16 +16,13 @@ use App\Http\Controllers\CommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/posts/{post}/comments', [\App\Http\Controllers\CommentController::class, 'store']);
+Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
-Route::get('/', [PostsController::class, 'index']);
+Route::get('/blog/{slug}', [PostsController::class, 'show'])->name('posts.show');
+Route::get('/listing', [PagesController::class, 'listing'])->name('listing');
 
+Route::get('/', [PagesController::class, 'index']);
 Route::resource('/blog', PostsController::class);
 
 Auth::routes();
-
-Route::get('/', [PostsController::class, 'index']);
-
-Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])->name('home');

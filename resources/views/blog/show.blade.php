@@ -2,7 +2,8 @@
 
 @section('content')
 
-@if ($post) {{-- ensure $post not null --}}
+@if ($post)
+    {{-- ensure $post not null --}}
     <div class="w-4/5 m-auto text-left">
         <div class="py-15">
             <h1 class="text-6xl">
@@ -10,12 +11,6 @@
             </h1>
         </div>
     </div>
-
-<form action="{{ url('/posts/' . $post->id . '/comments') }}" method="POST">
-    @csrf  {{-- 必须加上 CSRF 保护 --}}
-    <textarea name="content" required></textarea>
-    <button type="submit">Submit</button>
-</form>
 
     <div class="w-4/5 m-auto pt-20">
         <span class="text-gray-500">

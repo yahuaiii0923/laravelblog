@@ -20,7 +20,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('blog.index')
+        return view('blog.listing')
             ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
     }
 
@@ -132,5 +132,17 @@ class PostsController extends Controller
         return redirect('/blog')
             ->with('message', 'Your post has been deleted!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+
+        $posts = Post::where('title', 'LIKE', "%{$query}%")
+                    ->with('user')
+                    ->paginate(10);
+
+        return view('blog.listing', compact('posts'));
+    }
+
 }
 

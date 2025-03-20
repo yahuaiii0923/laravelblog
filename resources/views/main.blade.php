@@ -52,8 +52,10 @@
     <!-- Latest Blog Posts Section -->
     <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-gray-50">
         <h2 class="text-3xl font-semibold text-coral text-center mb-6">Latest Blog Posts</h2>
+
+        {{-- Add conditional check here --}}
+        @forelse($posts as $post)
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @foreach($posts as $post)
             <a href="{{ route('posts.show', $post->slug) }}" class="block bg-white shadow-md rounded-3xl hover:shadow-lg transition-shadow duration-300 group">
                 <div class="h-48 w-full overflow-hidden rounded-t-3xl">
                     <img src="{{ asset('images/' . $post->image_path) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
@@ -68,21 +70,15 @@
                     </div>
                 </div>
             </a>
-            @endforeach
         </div>
+        @empty
+        {{-- Show message when no posts exist --}}
+        <div class="text-center py-8">
+            <p class="text-gray-600 text-lg italic">
+                No Recent Blog Posts Available
+            </p>
+        </div>
+        @endforelse
     </div>
 
-    <!-- CTA Section -->
-    <div class="py-16 mt-12">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <h2 class="text-3xl font-semibold text-teal-400">Join the Jellycat Adventure</h2>
-            <p class="mt-4 text-lg text-gray-600">Stay updated on the latest collections, blog posts, and exclusive releases by subscribing to our newsletter.</p>
-            <div class="mt-8 max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-400">
-                <button class="bg-teal-400 text-white px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors duration-300">
-                    Subscribe
-                </button>
-            </div>
-        </div>
-    </div>
 @endsection

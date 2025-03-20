@@ -1,5 +1,13 @@
-@import "tailwindcss/base";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
+.background-image
+{
+    background-image: url('https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/1920w/image-manager/dorit-duckling-boat-race-hero.jpg?t=1741089073');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 600px;
+}

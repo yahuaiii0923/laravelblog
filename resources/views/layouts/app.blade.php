@@ -24,7 +24,7 @@
                     <img src="{{ asset('images/original.png') }}" alt="Jellycat Blog" class="h-12">
                 </a>
 
-                <nav class="space-x-4 text-teal-400 text-sm sm:text-base">
+                <nav class="space-x-4 text-cyan-400 text-sm sm:text-base">
                     <a class="no-underline hover:underline" href="/">Home</a>
                     <a class="no-underline hover:underline" href="/blog">Blog</a>
                     @guest
@@ -54,6 +54,5 @@
         <div>
             @include('layouts.footer')
         </div>
-    </div>
 </body>
 </html>

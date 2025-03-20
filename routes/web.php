@@ -18,7 +18,6 @@ use App\Http\Controllers\CommentController;
 */
 // Main Pages
 Route::get('/', [PagesController::class, 'index'])->name('home');
-Route::get('/listing', [PagesController::class, 'listing'])->name('listing');
 
 // Blog Routes
 Route::prefix('blog')->group(function () {
@@ -29,6 +28,8 @@ Route::prefix('blog')->group(function () {
     Route::get('/{slug}/edit', [PostsController::class, 'edit'])->name('blog.edit');
     Route::put('/{slug}', [PostsController::class, 'update'])->name('blog.update');
     Route::delete('/{slug}', [PostsController::class, 'destroy'])->name('blog.destroy');
+    Route::get('/blog', [PostsController::class, 'index'])->name('blog.listing');
+    Route::get('/blog/search', [PostsController::class, 'search'])->name('blog.search');
 });
 
 // Comments
@@ -36,3 +37,15 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
 // Authentication
 Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

@@ -7,6 +7,15 @@
             Blog Posts
         </h1>
     </div>
+
+    <!-- Search Bar -->
+    <div class="mb-5">
+        <input
+            type="text"
+            id="search"
+            class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Search for posts...">
+    </div>
 </div>
 
 @if (session()->has('message'))
@@ -18,7 +27,7 @@
 @endif
 
 @if (Auth::check())
-    <div class="pt-15 w-4/5 m-auto">
+    <div class="pt-8 w-4/5 m-auto mb-10 relative z-10">
         <a
             href="/blog/create"
             class="bg-blue-500 uppercase bg-transparent text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
@@ -27,55 +36,47 @@
     </div>
 @endif
 
-@foreach ($posts as $post)
-    <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-        <div>
-            <img src="{{ asset('images/' . $post->image_path) }}" alt="">
-        </div>
-        <div>
-            <h2 class="text-gray-700 font-bold text-5xl pb-4">
-                {{ $post->title }}
-            </h2>
+<!-- Post List (Scrollable) -->
+<div class="overflow-y-auto h-96 border border-gray-200 rounded-md p-5 w-4/5 mx-auto">
+    @foreach ($posts as $post)
+        <!-- Clickable Blog Post Container -->
+        <div class="flex items-center border-b border-gray-300 pb-5 mb-5 cursor-pointer blog-post-container"
+             onclick="window.location='/blog/{{ $post->slug }}'">
+            <!-- Image Container with Fixed Size -->
+            <div class="w-24 h-24 bg-gray-300 rounded-md mr-5 flex-shrink-0">
+                <!-- Image with object-cover to maintain aspect ratio -->
+                <img src="{{ asset('images/' . $post->image_path) }}" alt=""
+                     class="object-cover w-full h-full rounded-md">
+            </div>
 
-            <span class="text-gray-500">
-                By <span class="font-bold italic text-gray-800">{{ $post->user->name }}</span>, Created on {{ date('jS M Y', strtotime($post->updated_at)) }}
-            </span>
+            <div>
+                <a href="{{ route('posts.show', $post->slug) }}" class="block hover:text-blue-500">
+                    <h2 class="text-xl font-bold text-gray-700">{{ $post->title }}</h2>
+                </a>
+                <p class="text-gray-500 text-sm mt-2">{{ Str::limit($post->excerpt, 100, '...') }}</p>
+                <p class="text-gray-400 text-xs mt-1">Published on {{ $post->created_at->format('M d, Y') }}</p>
+            </div>
 
-            <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
-                {{ $post->description }}
-            </p>
-
-            <a href="/blog/{{ $post->slug }}" class="uppercase bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
-                Keep Reading
-            </a>
-
-            @if (isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
-                <span class="float-right">
-                    <a
-                        href="/blog/{{ $post->slug }}/edit"
-                        class="text-gray-700 italic hover:text-gray-900 pb-1 border-b-2">
+            <!-- Edit and Delete buttons (visible only to the user who created the post) -->
+            @if (Auth::check() && Auth::user()->id === $post->user_id)
+                <div class="ml-auto flex items-center">
+                    <!-- Edit Button -->
+                    <a href="/blog/{{ $post->slug }}/edit"
+                       class="text-gray-700 italic hover:text-gray-900 pb-1 border-b-2 mr-3">
                         Edit
                     </a>
-                </span>
-
-                <span class="float-right">
-                     <form
-                        action="/blog/{{ $post->slug }}"
-                        method="POST">
+                    <!-- Delete Button -->
+                    <form action="/blog/{{ $post->slug }}" method="POST" class="inline">
                         @csrf
-                        @method('delete')
-
-                        <button
-                            class="text-red-500 pr-3"
-                            type="submit">
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500">
                             Delete
                         </button>
-
                     </form>
-                </span>
+                </div>
             @endif
         </div>
-    </div>
-@endforeach
+    @endforeach
+</div>
 
 @endsection

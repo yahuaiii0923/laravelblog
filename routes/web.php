@@ -17,8 +17,10 @@ use App\Http\Controllers\CommentController;
 |
 */
 Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
-
+Route::resource('blog', PostsController::class);
+Route::post('/blog', [BlogController::class, 'store']);
 Route::get('/blog/{slug}', [PostsController::class, 'show'])->name('posts.show');
+//Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
 Route::get('/listing', [PagesController::class, 'listing'])->name('listing');
 
 Route::get('/', [PagesController::class, 'index']);

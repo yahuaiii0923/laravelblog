@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://cdn.tiny.cloud/1/YOUR-REAL-API-KEY/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/127.0.0.1:8000/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <div class="w-4/5 mx-auto pt-10">
     <div class="py-6"> <!-- Fixed header structure -->
@@ -30,7 +30,7 @@
             <input
                 type="text"
                 name="title"
-                placeholder="Post Title..."
+                placeholder="Blog Title"
                 class="w-full text-4xl font-bold border-b-2 border-gray-200 focus:outline-none focus:border-blue-500 py-4">
         </div>
 
@@ -76,6 +76,16 @@
 
 @push('scripts')
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            tinymce.init({
+                selector: '#editor',
+                plugins: 'lists link',
+                toolbar: 'bold italic | bullist numlist',
+                menubar: false,
+                height: 500
+            });
+        });
+
     // TinyMCE Editor Configuration
     document.addEventListener('DOMContentLoaded', function() {
         tinymce.init({

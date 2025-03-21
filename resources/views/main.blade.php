@@ -68,16 +68,15 @@
                                  alt="{{ $post->title }}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6">
-                            <div class="flex items-center space-x-4">
-                                <h3 class="text-xl font-semibold text-black group-hover:text-cyan-400 transition-colors">
-                                    {{ $post->title }}
-                                </h3>
-                                @if($titleLength <= $maxTitleLength && $post->description)
-                                    <p class="text-gray-600 truncate w-2/3">
-                                        {{ $post->description }}
-                                    </p>
-                                @endif
-                            </div>
+                            <h3 class="text-xl font-semibold text-black group-hover:text-cyan-400 transition-colors">
+                                {{ $post->title }}
+                            </h3>
+
+                            @if($titleLength <= $maxTitleLength && $post->description)
+                                <p class="text-gray-600 mt-2">
+                                    {{ $post->description }}
+                                </p>
+                            @endif
                         </div>
                     </a>
                 @endforeach

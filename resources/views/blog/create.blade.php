@@ -62,14 +62,19 @@
                 <!-- Image Preview Container -->
                 <div class="flex flex-wrap gap-4 mt-6" id="image-preview"></div>
             </div>
+            @error('images.*')
+                <div class="text-red-500 mt-2 text-sm">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <!-- Submit Button -->
         <div class="text-right">
             <button
                 type="submit"
-                class="px-8 py-3 bg-cyan-400 text-white font-bold rounded-3xl hover:bg-cyan-700 transition-colors">
-                Publish Post
+                class="mb-20 px-8 py-3 bg-cyan-400 text-white font-bold rounded-3xl hover:bg-cyan-700 transition-colors">
+                Publish
             </button>
         </div>
     </form>

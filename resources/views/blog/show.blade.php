@@ -67,15 +67,15 @@
 
     <!-- Edit and Delete Buttons -->
     @if (Auth::check() && Auth::user()->id === $post->user_id)
-        <div class="mt-10">
+        <div class="my-10">
             <a href="/blog/{{ $post->slug }}/edit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                Edit Post
+                Edit
             </a>
             <form action="/blog/{{ $post->slug }}" method="POST" class="inline">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 ml-2">
-                    Delete Post
+                    Delete
                 </button>
             </form>
         </div>
@@ -128,7 +128,12 @@
     </div>
 </div>
 @else
-    {{-- Error message remains the same --}}
+    {{--if $post is null，show error message --}}
+    <div class="w-4/5 m-auto text-center py-20">
+        <h2 class="text-4xl text-red-500">Post Not Found</h2>
+        <p class="text-gray-500 mt-3">The post you are looking for does not exist.</p>
+        <a href="{{ url('/blog') }}" class="text-blue-500 mt-5 inline-block">Go back to blog</a>
+    </div>
 @endif
 
 @endsection

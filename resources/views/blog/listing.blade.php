@@ -13,7 +13,7 @@
                 <input
                     type="text"
                     id="searchInput"
-                    class="w-full px-6 py-3 border-2 border-blue-100 rounded-full focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors"
+                    class="w-full px-6 py-3 border-2 border-gray-400 rounded-full focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors"
                     placeholder="Search blog posts..."
                     data-search-url="{{ route('blog.search') }}"
                 >
@@ -33,7 +33,7 @@
         </div>
 
         @if (session()->has('message'))
-        <div class="bg-teal-100 border-l-4 border-teal-500 text-teal-700 p-4 rounded-lg mb-6" role="alert">
+        <div class="bg-blue-50 text-cyan-400 p-4 rounded-full mb-6" role="alert">
             <p>{{ session()->get('message') }}</p>
         </div>
         @endif
@@ -82,7 +82,7 @@
                     <!-- Admin Controls -->
                     @can('manage-posts')
                     <div class="flex space-x-3">
-                        <a href="{{ route('blog.edit', $post->slug) }}" class="text-teal-600 hover:text-teal-700 flex items-center">
+                        <a href="{{ route('blog.edit', $post->slug) }}" class="mr-2 text-cyan-400 hover:text-cyan-700 flex items-center">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                             </svg>
@@ -102,7 +102,7 @@
             </div>
         </div>
         @empty
-        <div class="col-span-2 text-center py-12">
+        <div class="col-span-full min-h-[60vh] flex justify-center items-center">
             <p class="text-gray-500 text-lg">No blog posts found.</p>
         </div>
         @endforelse

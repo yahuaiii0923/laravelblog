@@ -6,6 +6,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostImage;
+use Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image as ImageFacade;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostsController extends Controller
@@ -48,7 +51,7 @@ class PostsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string', // Changed back to 'content' to match form
             'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048'
         ]);
 
 
@@ -70,19 +73,25 @@ class PostsController extends Controller
             ]);
 
         //stores images
-        if($request->hasFile('images')) {
-            foreach($request->file('images') as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $path = $image->storeAs('images', $filename, 'public');
+        if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $filename = time() . '_' . $image->getClientOriginalName();
+                    $path = $image->storeAs('images', $filename, 'public');
 
-                PostImage::create([
-                    'post_id' => $post->id,
-                    'image_path' => $path,
-                    'width' => $image->width(),
-                    'height' => $image->height()
-                ]);
-            }
-        }
+                    try {
+                        $img = ImageFacade::make($image->getRealPath());
+
+                        PostImage::create([
+                            'post_id' => $post->id,
+                            'image_path' => $path,
+                            'width' => $img->width(),
+                            'height' => $img->height()
+                        ]);
+                    } catch (\Exception $e) {
+                        dd('Image processing failed: ' . $e->getMessage());
+                    }
+                } // <-- Added closing brace for foreach
+            } // <-- Added closing brace for if
 
         return redirect()->route('posts.show', $post->slug);
     }
@@ -145,7 +154,7 @@ class PostsController extends Controller
                 ]);
 
         return redirect('/blog')
-            ->with('message', 'Your post has been updated!');
+            ->with('message', 'The post has been updated!');
     }
 
     /**
@@ -160,7 +169,7 @@ class PostsController extends Controller
         $post->delete();
 
         return redirect('/blog')
-            ->with('message', 'Your post has been deleted!');
+            ->with('message', 'The post has been deleted!');
     }
 
     public function search(Request $request)

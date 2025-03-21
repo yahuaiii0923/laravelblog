@@ -13,7 +13,7 @@
                 <input
                     type="text"
                     id="searchInput"
-                    class="w-full px-6 py-3 border-2 border-gray-400 rounded-full focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors"
+                    class="w-full px-6 py-3 border-1 border-gray-400 rounded-full focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors"
                     placeholder="Search blog posts..."
                     data-search-url="{{ route('blog.search') }}"
                 >
@@ -33,7 +33,7 @@
         </div>
 
         @if (session()->has('message'))
-        <div class="bg-blue-50 text-cyan-400 p-4 rounded-full mb-6" role="alert">
+        <div id="flash-message" class="bg-cyan-200 text-gray-700 p-4 rounded-full mb-6" role="alert">
             <p>{{ session()->get('message') }}</p>
         </div>
         @endif
@@ -129,5 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.remove();
+            }
+        }, 1000);
+    });
 </script>
 @endsection

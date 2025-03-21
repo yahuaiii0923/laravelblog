@@ -46,7 +46,7 @@
             <a href="{{ route('posts.show', $post->slug) }}" class="block">
                 <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-t-2xl overflow-hidden">
                     <img
-                        src="{{ asset('storage/'.$post->image_path) }}"
+                        src="{{ $post->images->first() ? asset('storage/'.$post->images->first()->image_path) : asset('images/placeholder.jpg') }}"
                         alt="{{ $post->title }}"
                         class="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                         loading="lazy"

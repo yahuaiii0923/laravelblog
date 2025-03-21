@@ -48,6 +48,12 @@ class Post extends Model
         return $this->hasMany(PostImage::class);
     }
 
+    //to get the first image
+    public function getFirstImageAttribute()
+    {
+        return $this->images->first();
+    }
+
     protected function serializeDate(\DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');

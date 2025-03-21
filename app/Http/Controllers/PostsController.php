@@ -23,7 +23,7 @@ class PostsController extends Controller
     public function index()
     {
         return view('blog.listing')
-            ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
+            ->with('posts', Post::with('images')->orderBy('updated_at', 'DESC')->get());
     }
 
     /**

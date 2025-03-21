@@ -21,7 +21,7 @@ class PostImage extends Model
 
     public function getImagePathAttribute($value)
     {
-        return asset('storage/' . $value);
+        return $value;
     }
 
     public function setImagePathAttribute($value)

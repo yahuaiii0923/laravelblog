@@ -61,7 +61,7 @@
     </div>
 
     <!-- Published Date -->
-    <div class="text-gray-500 text-sm mt-6">
+    <div class="text-gray-500 text-sm mt-10 mb-3">
         Published on {{ $post->created_at->format('M d, Y') }}
     </div>
 
@@ -121,7 +121,7 @@
             </div>
         @else
         <div>
-            <p class="my-6 ml-1 underline"><a href="{{ route('login') }}" class="text-cyan-400">Log in to comment</a></p>
+            <p class="mt-6 mb-20 ml-1 underline"><a href="{{ route('login') }}" class="text-cyan-400">Log in to comment</a></p>
         </div>
         @endif
 

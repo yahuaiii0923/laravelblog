@@ -77,7 +77,9 @@ class PostsController extends Controller
 
                 PostImage::create([
                     'post_id' => $post->id,
-                    'image_path' => $path
+                    'image_path' => $path,
+                    'width' => $image->width(),
+                    'height' => $image->height()
                 ]);
             }
         }

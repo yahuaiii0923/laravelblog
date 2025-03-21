@@ -11,10 +11,10 @@
                 <a href="/blog" class="group relative inline-flex items-center text-white font-bold text-xl py-2 px-4 rounded-full hover:scale-105 transition-all duration-300">
                     <span>Explore Collections</span>
                     <span class="ml-2 relative h-6 w-8 overflow-hidden">
-                        <svg class="absolute right-0 w-6 h-6 text-teal-400 transition-all duration-300 group-hover:translate-x-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <svg class="font-black absolute right-0 w-6 h-6 text-cyan-400 transition-all duration-300 group-hover:translate-x-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" stroke-width="1.2" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                         </svg>
-                        <span class="absolute left-0 top-1/2 w-0 h-[2px] bg-teal-400 transition-all duration-300 group-hover:w-full -translate-y-1/2"></span>
+                        <span class="absolute left-0 top-1/2 w-0 h-[2px] bg-cyan-400 transition-all duration-300 group-hover:w-full -translate-y-1/2"></span>
                     </span>
                 </a>
             </div>
@@ -74,7 +74,7 @@
         @empty
         {{-- Show message when no posts exist --}}
         <div class="text-center py-8">
-            <p class="text-gray-600 text-lg italic">
+            <p class="text-gray-600 text-lg">
                 No Recent Blog Posts Available
             </p>
         </div>

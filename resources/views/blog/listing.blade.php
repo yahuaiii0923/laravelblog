@@ -30,7 +30,7 @@
     <!-- Admin Controls -->
     @can('manage-posts')
     <div class="text-center mb-8">
-        <a href="{{ route('blog.create') }}" class="inline-flex items-center px-6 py-3 bg-teal-600 text-white font-semibold rounded-full hover:bg-teal-700 transition-colors">
+        <a href="{{ route('blog.create') }}" class="inline-flex items-center px-6 py-3 bg-cyan-400 text-white font-semibold rounded-full hover:bg-cyan-600 transition-colors">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>

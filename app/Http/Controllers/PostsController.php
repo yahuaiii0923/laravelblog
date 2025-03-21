@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\PostImage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostsController extends Controller
@@ -44,24 +45,29 @@ class PostsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+            'content' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
-
-        $request->image->move(public_path('images'), $newImageName);
-
-        Post::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-            'image_path' => $newImageName,
-            'user_id' => auth()->user()->id
+        $post = Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'slug' => Str::slug($request->title)
         ]);
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been added!');
+        if($request->hasFile('images')) {
+            foreach($request->file('images') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $path = $image->storeAs('images', $filename, 'public');
+
+                PostImage::create([
+                    'post_id' => $post->id,
+                    'image_path' => $path
+                ]);
+            }
+        }
+
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**

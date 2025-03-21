@@ -4,14 +4,14 @@
 <script src="https://cdn.tiny.cloud/1/127.0.0.1:8000/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <div class="w-4/5 mx-auto pt-10">
-    <div class="py-6"> <!-- Fixed header structure -->
-        <h1 class="text-6xl font-bold text-gray-800">
+    <div class="mb-12 ml-1">
+        <h1 class="text-6xl font-bold text-cyan-800">
             Create Post
         </h1>
     </div>
 
     @if ($errors->any())
-        <div class="mb-6">
+        <div class="mb-6 rounded-3xl">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li class="px-4 py-2 bg-red-100 text-red-700 rounded-lg mb-2">
@@ -31,11 +31,11 @@
                 type="text"
                 name="title"
                 placeholder="Blog Title"
-                class="rounded-3xl w-full text-4xl font-bold border-b-2 border-gray-200 focus:outline-none focus:border-blue-500 py-4">
+                class="rounded-3xl w-full text-4xl font-bold border-b-2 border-gray-200 focus:outline-none focus:border-blue-500 py-4 pl-6">
         </div>
 
         <!-- Content Editor -->
-        <div class="mb-8 border rounded-lg bg-white shadow-sm rounded-3xl overflow-hidden">
+        <div class="mb-8 border rounded-3xl bg-white shadow-sm rounded-3xl overflow-hidden">
             <textarea
                 name="content"
                 id="editor"
@@ -45,7 +45,7 @@
 
         <!-- Image Upload Section -->
         <div class="mb-8">
-            <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <div class="bg-gray-50 p-6 rounded-3xl shadow-inner">
                 <label class="inline-flex flex-col items-center px-6 py-3 bg-white rounded-lg shadow-md border border-blue-200 cursor-pointer hover:bg-blue-50 transition-colors">
                     <span class="text-blue-600 font-medium">
                         Select Images
@@ -67,7 +67,7 @@
         <div class="text-right">
             <button
                 type="submit"
-                class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                class="px-8 py-3 bg-blue-600 text-white font-bold rounded-3xl hover:bg-blue-700 transition-colors">
                 Publish Post
             </button>
         </div>
@@ -76,16 +76,6 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-            tinymce.init({
-                selector: '#editor',
-                plugins: 'lists link',
-                toolbar: 'bold italic | bullist numlist',
-                menubar: false,
-                height: 500
-            });
-        });
-
     // TinyMCE Editor Configuration
     document.addEventListener('DOMContentLoaded', function() {
         tinymce.init({

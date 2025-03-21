@@ -1317,6 +1317,9 @@ select {
 .m-auto {
   margin: auto;
 }
+.m-2 {
+  margin: 0.5rem;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1324,6 +1327,10 @@ select {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .mb-10 {
   margin-bottom: 2.5rem;
@@ -1393,6 +1400,15 @@ select {
 }
 .mt-8 {
   margin-top: 2rem;
+}
+.mr-6 {
+  margin-right: 1.5rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
 }
 .line-clamp-2 {
   overflow: hidden;
@@ -1923,6 +1939,10 @@ select {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.py-80 {
+  padding-top: 20rem;
+  padding-bottom: 20rem;
+}
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -1973,6 +1993,21 @@ select {
 }
 .pt-0\.5 {
   padding-top: 0.125rem;
+}
+.pl-6 {
+  padding-left: 1.5rem;
+}
+.pl-1 {
+  padding-left: 0.25rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pr-5 {
+  padding-right: 1.25rem;
+}
+.pr-16 {
+  padding-right: 4rem;
 }
 .text-left {
   text-align: left;
@@ -2148,6 +2183,14 @@ select {
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+.text-blue-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
+}
+.text-cyan-800 {
+  --tw-text-opacity: 1;
+  color: rgb(21 94 117 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;

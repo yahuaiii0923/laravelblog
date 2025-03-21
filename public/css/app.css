@@ -1590,6 +1590,15 @@ select {
 .w-2\.5 {
   width: 0.625rem;
 }
+.w-11\/12 {
+  width: 91.666667%;
+}
+.w-10\/12 {
+  width: 83.333333%;
+}
+.w-9\/12 {
+  width: 75%;
+}
 .max-w-2xl {
   max-width: 42rem;
 }

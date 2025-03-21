@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-4/5 m-auto mt-16 text-center">
-    <div class="py-15 pb-16 border-b border-gray-200">
-        <h1 class="text-6xl">
+<div class="w-10/12 m-auto mt-16 text-center">
+    <div class="py-15 pb-16 border-b border-gray-200 ">
+        <h1 class="text-6xl font-semibold">
             {{ $post->title }}
         </h1>
     </div>
 </div>
 
-<div class="w-4/5 m-auto pt-20">
+<div class="w-10/12 m-auto pt-20">
    <!-- Image Carousel -->
    @if($post->images->count() > 0)
    <div class="relative mb-12 group" x-data="{ activeSlide: 0 }" x-cloak>
@@ -84,7 +84,7 @@
 
 {{-- Comments Section --}}
 @if ($post)
-<div class="w-4/5 m-auto pt-20 border-t border-gray-300">
+<div class="w-10/12 m-auto pt-20 border-t border-gray-300">
     <div>
         <h2 class="mb-5 text-3xl font-bold">Comments</h2>
 

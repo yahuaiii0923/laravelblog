@@ -15,8 +15,8 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-    <div id="app">
+<body class="bg-white h-screen antialiased leading-none font-sans flex flex-col">
+    <div id="app" class="flex flex-col flex-grow">
         <header class="bg-blue-50 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <!-- Jellycat Logo -->
@@ -47,15 +47,13 @@
             </div>
         </header>
 
-        <div>
+        <main class="flex-grow">
             @yield('content')
-        </div>
+        </main>
 
-        <div>
-            @include('layouts.footer')
-        </div>
-    <div>
-    @stack('scripts')
+        @include('layouts.footer')
     </div>
+
+    @stack('scripts')
 </body>
 </html>

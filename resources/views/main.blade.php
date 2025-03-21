@@ -50,33 +50,39 @@
     </div>
 
     <!-- Latest Blog Posts Section -->
-    <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-gray-50">
+    <div id="latest-blog-posts" class="max-w-screen-2xl mx-auto py-12 px-16 bg-gray-50 flex-grow">
         <h2 class="text-3xl font-semibold text-black text-center mb-6">Latest Blog Posts</h2>
 
-        {{-- Add conditional check here --}}
         @if($posts->count())
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($posts as $post)
+                    @php
+                        $titleLength = mb_strlen($post->title);
+                        $maxTitleLength = 40;
+                    @endphp
+
                     <a href="{{ route('posts.show', $post->slug) }}"
-                       class="block bg-white shadow-md rounded-3xl hover:shadow-lg transition-shadow duration-300 group">
+                       class="block bg-white shadow-md rounded-3xl hover:shadow-lg transition-shadow duration-300 group overflow-hidden">
                         <div class="h-52 w-full overflow-hidden rounded-t-3xl">
                             <img src="{{ $post->images->first() ? asset('storage/'.$post->images->first()->image_path) : asset('images/placeholder.jpg') }}"
                                  alt="{{ $post->title }}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-semibold text-black group-hover:text-cyan-400 transition-colors">
-                                {{ $post->title }}
-                            </h3>
-                            <p class="text-gray-600 mt-2">{{ Str::limit($post->excerpt, 120) }}</p>
-                            <div class="mt-4 inline-block text-mint underline group-hover:text-cyan-400 transition-colors">
-                                Read More
+                            <div class="flex items-center space-x-4">
+                                <h3 class="text-xl font-semibold text-black group-hover:text-cyan-400 transition-colors">
+                                    {{ $post->title }}
+                                </h3>
+                                @if($titleLength <= $maxTitleLength && $post->description)
+                                    <p class="text-gray-600 truncate w-2/3">
+                                        {{ $post->description }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
                     </a>
                 @endforeach
             </div>
         @else
-            {{-- Show message when no posts exist --}}
             <div class="text-center py-8">
                 <p class="text-gray-600 text-lg">
                     No Recent Blog Posts Available

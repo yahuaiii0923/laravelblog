@@ -1,4 +1,4 @@
-<footer class="bg-blue-50 py-20 mt-20">
+<footer class="bg-blue-50 py-20">
     <div class="w-5/6 m-auto border-b-2 border-gray-700 pb-16 flex flex-col justify-center items-center">
         <div class="sm:grid grid-cols-3 gap-96">
         <div>

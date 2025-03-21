@@ -4,14 +4,14 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header Section -->
     <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-10">Jellycat Blog</h1>
+        <h1 class="text-4xl font-bold text-gray-900 mb-10">Our Stories...</h1>
 
         <!-- Search Bar -->
         <div class="max-w-2xl mx-auto mb-8 relative">
             <input
                 type="text"
                 id="searchInput"
-                class="w-full px-6 py-3 border-2 border-gray-200 rounded-full focus:outline-none focus:border-teal-500 transition-colors"
+                class="w-full px-6 py-3 border-2 border-blue-100 rounded-full focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors"
                 placeholder="Search blog posts..."
                 data-search-url="{{ route('blog.search') }}"
             >
@@ -40,10 +40,16 @@
     @endcan
 
     <!-- Blog Posts Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="postsContainer">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16" id="postsContainer">
         @forelse($posts as $post)
+        @php
+            $titleLength = mb_strlen($post->title);
+            $maxTitleLength = 40;
+        @endphp
+
         <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 post-item" data-title="{{ strtolower($post->title) }}">
             <a href="{{ route('posts.show', $post->slug) }}" class="block">
+                <!-- Blog Image -->
                 <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-t-2xl overflow-hidden">
                     <img
                         src="{{ $post->images->first() ? asset('storage/'.$post->images->first()->image_path) : asset('images/placeholder.jpg') }}"
@@ -52,8 +58,13 @@
                         loading="lazy"
                     >
                 </div>
+                <!-- Blog Content -->
                 <div class="p-6">
                     <h2 class="text-xl font-bold text-gray-800 mb-2">{{ $post->title }}</h2>
+                     <!-- Blog Description (Only show if title is short enough) -->
+                     @if($titleLength <= $maxTitleLength && $post->description)
+                        <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->description }}</p>
+                     @endif
                     <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->excerpt }}</p>
                     <div class="flex items-center text-sm text-gray-500">
                         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -26,16 +26,16 @@
         @csrf
 
         <!-- Title Input -->
-        <div class="mb-8">
+        <div class="mb-8 rounded-3xl">
             <input
                 type="text"
                 name="title"
                 placeholder="Blog Title"
-                class="w-full text-4xl font-bold border-b-2 border-gray-200 focus:outline-none focus:border-blue-500 py-4">
+                class="rounded-3xl w-full text-4xl font-bold border-b-2 border-gray-200 focus:outline-none focus:border-blue-500 py-4">
         </div>
 
         <!-- Content Editor -->
-        <div class="mb-8 border rounded-lg bg-white shadow-sm">
+        <div class="mb-8 border rounded-lg bg-white shadow-sm rounded-3xl overflow-hidden">
             <textarea
                 name="content"
                 id="editor"

@@ -6,7 +6,7 @@
         <div class="w-full">
             <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-3xl sm:shadow-lg sm:shadow-xl">
 
-                <header class="text-xl font-bold bg-blue-50 text-blue-800 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-3xl">
+                <header class="text-xl font-bold bg-blue-50 text-gray-900 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-3xl">
                     {{ __('Login') }}
                 </header>
 
@@ -14,7 +14,7 @@
                     @csrf
 
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-blue-800 text-sm mb-2 sm:mb-4">
+                        <label for="email" class="block text-gray-900 text-sm mb-2 sm:mb-4">
                             {{ __('E-Mail Address') }}:
                         </label>
 
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password" class="block text-blue-800 text-sm mb-2 sm:mb-4">
+                        <label for="password" class="block text-gray-900 text-sm mb-2 sm:mb-4">
                             {{ __('Password') }}:
                         </label>
 
@@ -51,8 +51,8 @@
                     </div>
 
                     <div class="flex items-center">
-                        <label class="inline-flex items-center text-sm text-blue-800" for="remember">
-                            <input type="checkbox" name="remember" id="remember" class="form-checkbox text-cyan-400 rounded"
+                        <label class="inline-flex items-center text-sm text-gray-900" for="remember">
+                            <input type="checkbox" name="remember" id="remember" class="form-checkbox text-gray-900 rounded"
                                 {{ old('remember') ? 'checked' : '' }}>
                             <span class="ml-2">{{ __('Remember Me') }}</span>
                         </label>
@@ -72,7 +72,7 @@
                         </button>
 
                         @if (Route::has('register'))
-                        <p class="w-full text-xs text-center text-blue-800 my-6 sm:text-sm sm:my-8">
+                        <p class="w-full text-xs text-center text-gray-900 my-6 sm:text-sm sm:my-8">
                             {{ __("Don't have an account?") }}
                             <a class="text-cyan-400 hover:text-cyan-700 no-underline hover:underline" href="{{ route('register') }}">
                                 {{ __('Register') }}

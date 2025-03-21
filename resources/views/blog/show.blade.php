@@ -64,22 +64,6 @@
     <div class="text-gray-500 text-sm mt-10 mb-3">
         Published on {{ $post->created_at->format('M d, Y') }}
     </div>
-
-    <!-- Edit and Delete Buttons -->
-    @if (Auth::check() && Auth::user()->id === $post->user_id)
-        <div class="my-10">
-            <a href="/blog/{{ $post->slug }}/edit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                Edit
-            </a>
-            <form action="/blog/{{ $post->slug }}" method="POST" class="inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 ml-2">
-                    Delete
-                </button>
-            </form>
-        </div>
-    @endif
 </div>
 
 {{-- Comments Section --}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use App\Models\PostImage;
 use Image;
@@ -76,7 +77,7 @@ class PostsController extends Controller
         if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $filename = time() . '_' . $image->getClientOriginalName();
-                    $path = $image->storeAs('images', $filename, 'public');
+                    $path = $image->storeAs('posts', $filename, 'public');
 
                     try {
                         $img = ImageFacade::make($image->getRealPath());
@@ -133,28 +134,52 @@ class PostsController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        $post = Post::where('slug', $slug)->firstOrFail();
+
         $request->validate([
-            'title' => 'required',
-            'content' => 'required', // Changed from 'description'
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'delete_images' => 'sometimes|array'
         ]);
 
-        // Generate description from content
-        $description = substr(strip_tags($request->input('content')), 0, 150);
-        if (strlen(strip_tags($request->input('content'))) > 150) {
-            $description .= '...';
+        // Slug generation with conditional check
+        $slug = $post->title !== $request->title
+            ? SlugService::createSlug(Post::class, 'slug', $request->title)
+            : $post->slug;
+
+        $post->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'description' => substr(strip_tags($request->input('content')), 0, 150) . '...',
+            'slug' => $slug,
+        ]);
+
+        // Handle new images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $path = $image->storeAs('posts', $filename, 'public');
+
+                PostImage::create([
+                    'post_id' => $post->id,
+                    'image_path' => $path,
+                    'width' => ImageFacade::make($image)->width(),
+                    'height' => ImageFacade::make($image)->height()
+                ]);
+            }
         }
 
-        Post::where('slug', $slug)
-             ->update([
-                'title' => $request->input('title'),
-                'content' => $request->input('content'),
-                'description' => $description, // Auto-generated description
-                'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-                'user_id' => auth()->user()->id
-                ]);
+        // Handle deleted images
+        if ($request->has('delete_images')) {
+            $imagesToDelete = PostImage::whereIn('id', $request->delete_images)->get();
+            foreach ($imagesToDelete as $image) {
+                Storage::disk('public')->delete($image->image_path);
+                $image->delete();
+            }
+        }
 
-        return redirect('/blog')
-            ->with('message', 'The post has been updated!');
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**
@@ -169,7 +194,7 @@ class PostsController extends Controller
         $post->delete();
 
         return redirect('/blog')
-            ->with('message', 'The post has been deleted!');
+            ->with('message', 'Post deleted successfully!');
     }
 
     public function search(Request $request)

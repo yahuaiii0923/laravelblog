@@ -25,6 +25,7 @@
         "webpack": "^5.89.0"
     },
     "dependencies": {
+        "@tailwindcss/line-clamp": "^0.4.4",
         "axios": "^0.21.1",
         "jquery": "^3.7.1",
         "popper.js": "^1.16.1"

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-4/5 m-auto text-center">
+<div class="w-4/5 m-auto mt-20 text-center">
     <div class="py-15 border-b border-gray-200">
         <h1 class="text-6xl">
             {{ $post->title }}
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Published Date -->
-    <div class="mt-10 text-gray-500 text-sm">
+    <div class="text-gray-500 text-sm">
         Published on {{ $post->created_at->format('M d, Y') }}
     </div>
 
@@ -47,7 +47,7 @@
 {{-- Comments Section --}}
 @if ($post)  <!-- Ensure $post is valid before showing comments -->
 <div class="w-4/5 m-auto pt-20">
-    <h2 class="text-3xl font-bold pb-5">Comments</h2>
+    <h2 class="text-3xl font-bold pb-2">Comments</h2>
 
     @foreach ($post->comments as $comment)
         <div class="border-b border-gray-200 mb-4 pb-2">
@@ -61,8 +61,8 @@
     @if(auth()->check())
         <form action="{{ url('/posts/' . $post->id . '/comments') }}" method="POST" class="mt-6">
             @csrf
-            <textarea name="content" rows="3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Add a comment..." required></textarea>
-            <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Post Comment</button>
+            <textarea name="content" rows="3" class="-pl-20 w-full p-5 border border-gray-300 rounded-3xl focus:border-cyan-300 focus:ring-0 focus:outline-none transition-colors" placeholder="Add a comment..." required></textarea>
+            <button type="submit" class="mt-6 mb-20 px-4 py-2 bg-cyan-400 text-white rounded-full hover:bg-cyan-600">Post Comment</button>
         </form>
     @else
         <p class="mt-5"><a href="{{ route('login') }}" class="text-blue-500">Log in to comment</a></p>

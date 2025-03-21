@@ -5,7 +5,7 @@
     <div class="background-image grid grid-cols-1 m-auto bg-blue-100">
         <div class="flex text-gray-100 pt-10">
             <div class="m-auto pt-4 pb-10 sm:m-auto w-4/5 block text-left">
-                <h1 class="sm:text-white text-5xl uppercase font-bold text-shadow-md pb-14">
+                <h1 class="sm:text-white text-5xl font-bold tracking-wide text-shadow-md pb-14">
                     Welcome to the Jellycat World
                 </h1>
                 <a href="/blog" class="group relative inline-flex items-center text-white font-bold text-xl py-2 px-4 rounded-full hover:scale-105 transition-all duration-300">
@@ -14,7 +14,7 @@
                         <svg class="font-black absolute right-0 w-6 h-6 text-cyan-400 transition-all duration-300 group-hover:translate-x-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" stroke-width="1.2" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                         </svg>
-                        <span class="absolute left-0 top-1/2 w-0 h-[2px] bg-cyan-400 transition-all duration-300 group-hover:w-full -translate-y-1/2"></span>
+                        <span class="absolute left-0 top-1/2 w-0 h-[2.7px] bg-cyan-400 transition-all duration-300 group-hover:w-full -translate-y-1/2"></span>
                     </span>
                 </a>
             </div>

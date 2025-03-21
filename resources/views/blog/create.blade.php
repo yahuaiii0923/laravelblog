@@ -5,7 +5,7 @@
 
 <div class="w-4/5 mx-auto pt-10">
     <div class="mb-12 ml-1">
-        <h1 class="text-6xl font-bold text-cyan-800">
+        <h1 class="text-6xl font-bold text-cyan-900">
             Create Post
         </h1>
     </div>
@@ -46,14 +46,15 @@
         <!-- Image Upload Section -->
         <div class="mb-8">
             <div class="bg-gray-50 p-6 rounded-3xl shadow-inner">
-                <label class="inline-flex flex-col items-center px-6 py-3 bg-white rounded-lg shadow-md border border-blue-200 cursor-pointer hover:bg-blue-50 transition-colors">
-                    <span class="text-blue-600 font-medium">
+                <label class="inline-flex flex-col items-center px-6 py-3 bg-white rounded-lg shadow-md border border-cyan-400 cursor-pointer hover:bg-cyan-50 transition-colors">
+                    <span class="text-cyan-400 font-medium">
                         Select Images
                     </span>
                     <input
                         type="file"
                         name="images[]"
                         multiple
+                        accept="image/*"
                         class="hidden"
                         id="image-upload">
                 </label>
@@ -67,7 +68,7 @@
         <div class="text-right">
             <button
                 type="submit"
-                class="px-8 py-3 bg-blue-600 text-white font-bold rounded-3xl hover:bg-blue-700 transition-colors">
+                class="px-8 py-3 bg-cyan-400 text-white font-bold rounded-3xl hover:bg-cyan-700 transition-colors">
                 Publish Post
             </button>
         </div>
@@ -101,15 +102,22 @@
         });
     });
 
-    // Enhanced Image Upload Preview with Delete Functionality
-    document.getElementById('image-upload').addEventListener('change', function(e) {
-        const preview = document.getElementById('image-preview');
-        const files = Array.from(e.target.files);
+    // Initialize files array
+    let allFiles = [];
 
-        // Clear existing previews
+    document.getElementById('image-upload').addEventListener('change', function(e) {
+        const newFiles = Array.from(e.target.files);
+        allFiles = [...allFiles, ...newFiles]; // Merge existing and new files
+
+        updatePreview();
+        updateFileInput();
+    });
+
+    function updatePreview() {
+        const preview = document.getElementById('image-preview');
         preview.innerHTML = '';
 
-        files.forEach((file, index) => {
+        allFiles.forEach((file, index) => {
             if (!file.type.startsWith('image/')) return;
 
             const reader = new FileReader();
@@ -122,14 +130,12 @@
                          class="w-full h-full object-cover"
                          alt="Preview">
 
-                    <!-- Delete Button -->
                     <button type="button"
                             class="absolute top-2 right-2 w-6 h-6 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                             data-index="${index}">
                         ×
                     </button>
 
-                    <!-- File Name -->
                     <div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent">
                         <span class="text-xs text-white font-medium truncate">
                             ${file.name}
@@ -137,26 +143,23 @@
                     </div>
                 `;
 
-                // Add delete functionality
                 card.querySelector('button').addEventListener('click', () => {
-                    // Remove from preview
-                    card.remove();
-
-                    // Remove from file input
-                    const dt = new DataTransfer();
-                    Array.from(e.target.files)
-                        .filter((_, i) => i !== index)
-                        .forEach(file => dt.items.add(file));
-
-                    e.target.files = dt.files;
+                    allFiles = allFiles.filter((_, i) => i !== index);
+                    updatePreview();
+                    updateFileInput();
                 });
 
                 preview.appendChild(card);
             };
-
             reader.readAsDataURL(file);
         });
-    });
+    }
+
+    function updateFileInput() {
+        const dataTransfer = new DataTransfer();
+        allFiles.forEach(file => dataTransfer.items.add(file));
+        document.getElementById('image-upload').files = dataTransfer.files;
+    }
 </script>
 @endpush
 @endsection

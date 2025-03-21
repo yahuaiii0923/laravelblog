@@ -11,3 +11,11 @@
     background-size: cover;
     height: 600px;
 }
+
+.h1
+{
+    font-family: "Quicksand", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 700 !important;
+    font-style: normal;
+}

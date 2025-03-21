@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostImage;
@@ -44,17 +45,31 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'title' => 'required|string|max:255',
+            'content' => 'required|string', // Changed back to 'content' to match form
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
 
+
+        // Generate description from content (first 150 characters)
+        $description = substr(strip_tags($request->input('content')), 0, 150);
+        if (strlen(strip_tags($request->input('content'))) > 150) {
+            $description .= '...';
+        }
+
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+
+        // Create post with both content and auto-generated description
         $post = Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'slug' => Str::slug($request->title)
-        ]);
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'description' => $description, // Auto-generated description
+                'slug' => $slug,
+                'user_id' => auth()->user()->id,
+            ]);
 
+        //stores images
         if($request->hasFile('images')) {
             foreach($request->file('images') as $image) {
                 $filename = time() . '_' . $image->getClientOriginalName();
@@ -109,16 +124,23 @@ class PostsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'content' => 'required', // Changed from 'description'
         ]);
 
+        // Generate description from content
+        $description = substr(strip_tags($request->input('content')), 0, 150);
+        if (strlen(strip_tags($request->input('content'))) > 150) {
+            $description .= '...';
+        }
+
         Post::where('slug', $slug)
-            ->update([
+             ->update([
                 'title' => $request->input('title'),
-                'description' => $request->input('description'),
+                'content' => $request->input('content'),
+                'description' => $description, // Auto-generated description
                 'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
                 'user_id' => auth()->user()->id
-            ]);
+                ]);
 
         return redirect('/blog')
             ->with('message', 'Your post has been updated!');

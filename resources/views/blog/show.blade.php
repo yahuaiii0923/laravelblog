@@ -11,9 +11,11 @@
 
 <div class="w-4/5 m-auto pt-20">
     <!-- Blog Post Image -->
-    <div class="w-full h-96 overflow-hidden mb-10">
-        <img src="{{ asset('images/' . $post->image_path) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
-    </div>
+    @foreach($post->images as $image)
+        <img src="{{ asset('storage/' . $image->image_path) }}"
+             alt="Post image"
+             class="mb-4 rounded-lg shadow-md">
+    @endforeach
 
     <!-- Blog Post Content -->
     <div class="prose max-w-none">

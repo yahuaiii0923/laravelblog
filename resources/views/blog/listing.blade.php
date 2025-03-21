@@ -4,7 +4,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <!-- Header Section -->
     <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">Jellycat Blog</h1>
+        <h1 class="text-4xl font-bold text-gray-900 mb-10">Jellycat Blog</h1>
 
         <!-- Search Bar -->
         <div class="max-w-2xl mx-auto mb-8 relative">

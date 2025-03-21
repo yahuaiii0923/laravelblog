@@ -1,21 +1,18 @@
 <?php
 
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Models\Post;
 
-Class PostImage extends Model
+class PostImage extends Model
 {
-    protected $fillable = ['image_path'];
+    protected $fillable = ['post_id', 'image_path'];
 
-    public function up()
-    {
-        Schema::create('post_images', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
-            $table->string('image_path');
-            $table->timestamps();
-        });
-    }
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 
     public function post()
     {
@@ -32,4 +29,3 @@ Class PostImage extends Model
         $this->attributes['image_path'] = Str::after($value, 'storage/');
     }
 }
-

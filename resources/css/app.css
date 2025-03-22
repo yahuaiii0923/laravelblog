@@ -12,12 +12,11 @@
     height: 600px;
 }
 
-.h1
-{
-    font-family: "Quicksand", sans-serif !important;
-    font-optical-sizing: auto;
-    font-weight: 700 !important;
-    font-style: normal;
+.contact-hero-background {
+    background-image: url('https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/1920w/image-manager/turtle-and-hare-desktop-hero-1.jpg?t=1742387440');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* Scrollbar Hide */

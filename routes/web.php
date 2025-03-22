@@ -19,6 +19,10 @@ use App\Http\Controllers\CommentController;
 // Main Pages
 Route::get('/', [PagesController::class, 'index'])->name('home');
 
+// Contact Routes (moved outside blog group)
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+Route::post('/contact', [PagesController::class, 'submitContact'])->name('contact.submit');
+
 // Blog Routes
 Route::prefix('blog')->group(function () {
     Route::get('/', [PostsController::class, 'index'])->name('blog.index');
@@ -28,8 +32,7 @@ Route::prefix('blog')->group(function () {
     Route::get('/{slug}/edit', [PostsController::class, 'edit'])->name('blog.edit');
     Route::put('/{slug}', [PostsController::class, 'update'])->name('blog.update');
     Route::delete('/{slug}', [PostsController::class, 'destroy'])->name('blog.destroy');
-    Route::get('/blog', [PostsController::class, 'index'])->name('blog.listing');
-    Route::get('/blog/search', [PostsController::class, 'search'])->name('blog.search');
+    Route::get('/search', [PostsController::class, 'search'])->name('blog.search');
 });
 
 // Comments
@@ -37,6 +40,4 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
 // Authentication
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::get('/home', [HomeController::class, 'index'])->name('home');

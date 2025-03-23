@@ -179,7 +179,7 @@ class PostsController extends Controller
             }
         }
 
-        return redirect()->route('posts.show', $post->slug);
+        return redirect()->route('blog.index')->with('message', 'Post updated successfully!');
     }
 
     /**

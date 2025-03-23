@@ -32,7 +32,7 @@
             @endcan
         </div>
 
-        @if (session()->has('message'))
+        @if (session('message'))
         <div id="flash-message" class="text-sm text-center text-green-700 bg-green-50 px-5 py-2 rounded-full border border-green-200 sm:mx-6 sm:mt-6 shadow-sm" role="alert">
             <p>{{ session()->get('message') }}</p>
         </div>
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (flashMessage) {
                 flashMessage.remove();
             }
-        }, 1000);
+        }, 1500);
     });
 </script>
 @endsection

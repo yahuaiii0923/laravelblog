@@ -9,18 +9,18 @@
                 <ul class="py-4 sm:text-s pt-4 text-black-400">
                     <li class="pb-1"><a href="{{ route('care') }}" class="hover:text-cyan-400">Safety & Care</a></li>
                     <li class="pb-1"><a href="{{ route('measure') }}" class="hover:text-cyan-400">How we measure</a></li>
-                    <li class="pb-1"><a href="/gifting" class="hover:text-cyan-400">Gifting Options</a></li>
+                    <li class="pb-1"><a href="{{ route('gifting') }}" class="hover:text-cyan-400">Gifting Options</a></li>
                     <li class="pb-1"><a href="{{ route('contact') }}" class="hover:text-cyan-400">Contact Us</a></li>
                 </ul>
             </div>
 
-            <!-- Second Column - Latest Blog (Original Structure Preserved) -->
+            <!-- Second Column - Latest Blog -->
             <div class="ml-8">
                 <h3 class="text-l sm:font-bold text-black-100">
                     Latest Blog
                 </h3>
                 <ul class="py-4 sm:text-s pt-4 text-black-400">
-                    @forelse ($latestPosts->take(1) as $post)
+                    @forelse ($latestPosts->take(2) as $post)
                        <li class="pb-1 relative group">
                             <a href="{{ route('posts.show', $post->slug) }}"
                                 class="hover:text-cyan-400 inline-block">

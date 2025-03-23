@@ -51,4 +51,12 @@ class PagesController extends Controller
           return view('measure');
       }
 
+      /**
+       * Display Gifting Options page
+       */
+      public function gifting()
+      {
+          return view('gifting');
+      }
+
   }

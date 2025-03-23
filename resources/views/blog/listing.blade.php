@@ -50,7 +50,7 @@
         <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 post-item relative pb-16" data-title="{{ strtolower($post->title) }}">
             <a href="{{ route('posts.show', $post->slug) }}" class="block">
                 <!-- Blog Image -->
-                <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-t-2xl overflow-hidden">
+                <div class="h-64 bg-gray-100 rounded-t-2xl overflow-hidden">
                     <img
                         src="{{ $post->images->first() ? asset('storage/'.$post->images->first()->image_path) : asset('images/placeholder.jpg') }}"
                         alt="{{ $post->title }}"
@@ -59,7 +59,7 @@
                     >
                 </div>
                 <!-- Blog Content -->
-                <div class="p-6 pb-12">
+                <div class="p-6 pb-12 flex-1 overflow-hidden">
                     <h2 class="text-xl font-bold text-gray-800 mb-2">{{ $post->title }}</h2>
                     @if($titleLength <= $maxTitleLength && $post->description)
                         <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->description }}</p>

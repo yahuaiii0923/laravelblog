@@ -20,7 +20,7 @@
                     Latest Blog
                 </h3>
                 <ul class="py-4 sm:text-s pt-4 text-black-400">
-                    @forelse ($latestPosts->take(2) as $post)
+                    @forelse ($latestPosts as $post)
                        <li class="pb-1 relative group">
                             <a href="{{ route('posts.show', $post->slug) }}"
                                 class="hover:text-cyan-400 inline-block">

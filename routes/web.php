@@ -36,6 +36,7 @@ Route::prefix('blog')->group(function () {
 });
 
 Route::get('/care', [PagesController::class, 'care'])->name('care');
+Route::get('/measure', [PagesController::class, 'measure'])->name('measure');
 
 // Comments
 Route::post('/posts/{post}/comments', [CommentController::class, 'store']);

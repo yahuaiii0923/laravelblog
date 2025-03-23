@@ -35,12 +35,20 @@ class PagesController extends Controller
           return redirect()->back()->with('success', 'Thank you for your message! We will respond within 3 business days.');
   }
 
-  /**
+      /**
        * Display Safety & Care page
        */
       public function care()
       {
           return view('care');
+      }
+
+      /**
+      * Display How We Measure page
+      */
+      public function measure()
+      {
+          return view('measure');
       }
 
   }

@@ -7,8 +7,8 @@
                     Need Help?
                 </h3>
                 <ul class="py-4 sm:text-s pt-4 text-black-400">
-                    <li class="pb-1"><a href="{{ route('care') }}" class="hover:text-cyan-400">Safety and Care</a></li>
-                    <li class="pb-1"><a href="/measure" class="hover:text-cyan-400">How we measure</a></li>
+                    <li class="pb-1"><a href="{{ route('care') }}" class="hover:text-cyan-400">Safety & Care</a></li>
+                    <li class="pb-1"><a href="{{ route('measure') }}" class="hover:text-cyan-400">How we measure</a></li>
                     <li class="pb-1"><a href="/gifting" class="hover:text-cyan-400">Gifting Options</a></li>
                     <li class="pb-1"><a href="{{ route('contact') }}" class="hover:text-cyan-400">Contact Us</a></li>
                 </ul>

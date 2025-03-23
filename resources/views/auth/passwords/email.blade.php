@@ -11,7 +11,7 @@
                 </header>
 
                 @if (session('status'))
-                <div class="text-sm text-green-700 bg-green-100 px-5 py-6 sm:rounded sm:border sm:border-green-400 sm:mx-6 sm:mt-6"
+                <div class="text-sm text-center text-green-700 bg-green-50 px-5 py-2 rounded-full border border-green-200 sm:mx-6 sm:mt-6 shadow-sm"
                     role="alert">
                     {{ session('status') }}
                 </div>

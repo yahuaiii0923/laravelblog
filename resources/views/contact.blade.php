@@ -18,7 +18,7 @@
             <!-- Contact Form -->
             <div class="bg-white rounded-2xl shadow-xl p-8">
                 <h2 class="text-3xl font-semibold text-gray-800 ">Send Us a Message</h2>
-                <p class="text-sm text-gray-800 font-light mb-6">
+                <p class="text-sm text-gray-500 font-light mt-2 mb-6">
                     We'd love to hear your jellycat stories or answer any questions!
                 </p>
 
@@ -81,7 +81,7 @@
                             </svg>
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-2">Visit Us</h3>
-                                <p class="text-gray-600">123 Jellycat Lane<br>Plush City, PC 12345<br>United Kingdom</p>
+                                <p class="text-gray-500">123 Jellycat Lane<br>Plush City, PC 12345<br>United Kingdom</p>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                             </svg>
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-2">Call Us</h3>
-                                <p class="text-gray-600">+44 1234 567890<br>Mon-Fri: 9am - 5pm GMT</p>
+                                <p class="text-gray-500">+44 1234 567890<br>Mon-Fri: 9am - 5pm GMT</p>
                             </div>
                         </div>
 
@@ -101,7 +101,7 @@
                             </svg>
                             <div>
                                 <h3 class="font-semibold text-gray-800 mb-2">Email Us</h3>
-                                <p class="text-gray-600">hello@jellycatworld.com<br>stories@jellycatworld.com</p>
+                                <p class="text-gray-500">hello@jellycatworld.com<br>stories@jellycatworld.com</p>
                             </div>
                         </div>
                     </div>

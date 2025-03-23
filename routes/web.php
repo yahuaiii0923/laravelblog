@@ -35,6 +35,8 @@ Route::prefix('blog')->group(function () {
     Route::get('/search', [PostsController::class, 'search'])->name('blog.search');
 });
 
+Route::get('/care', [PagesController::class, 'care'])->name('care');
+
 // Comments
 Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 

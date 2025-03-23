@@ -1,5 +1,5 @@
 <footer class="bg-blue-50 py-14">
-    <div class="w-5/6 m-auto border-b-2 border-gray-700 pb-16 flex flex-col justify-center items-center">
+    <div class="w-4/5 m-auto border-b-2 border-gray-700 pb-16 flex flex-col justify-center items-center">
         <div class="sm:grid grid-cols-3 gap-96">
         <div>
             <h3 class="text-l sm:font-bold text-black-100">
@@ -34,7 +34,7 @@
                    <li class="pb-1 relative group">
                         <a href="{{ route('posts.show', $post->slug) }}"
                             class="hover:text-cyan-400 inline-block">
-                            {{ Str::limit($post->title, 16, '...') }}
+                            {{ Str::limit($post->title, 12, '...') }}
                             <span class="left-3 absolute z-10 invisible group-hover:visible bg-blue-200 text-gray-800 text-xs px-3 py-1.5 rounded-3xl top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap transition-opacity duration-200">
                                 {{ $post->title }}
                                 <svg class="absolute text-blue-200 h-1.5 w-full left-0 top-0 -translate-y-full" viewBox="0 0 10 5">

@@ -14,12 +14,6 @@ class PagesController extends Controller
             return view('main', compact('posts'));
         }
 
-   public function listing()
-   {
-       $posts = Post::latest()->get(); // Fetch all posts from the database
-       return view('listings', ['posts' => $posts]); // Pass the $posts variable to the view
-   }
-
   public function contact()
       {
           return view('contact');

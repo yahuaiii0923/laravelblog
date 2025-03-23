@@ -5,10 +5,10 @@
     <div class="background-image grid grid-cols-1 m-auto bg-blue-100">
         <div class="flex text-gray-100 pt-10">
             <div class="m-auto pt-4 pb-10 sm:m-auto w-4/5 block text-left">
-                <h1 class="sm:text-white text-5xl font-bold tracking-wide text-shadow-md pb-14">
+                <h1 class="sm:text-white text-5xl font-bold tracking-wide text-shadow-md pb-8">
                     Welcome to the Jellycat World
                 </h1>
-                <a href="/blog" class="group relative inline-flex items-center text-white font-bold text-xl py-2 px-4 rounded-full hover:scale-105 transition-all duration-300">
+                <a href="/blog" class="group relative inline-flex items-center text-white font-bold text-xl -mt-4 ml-2 rounded-full hover:scale-105 transition-all duration-300">
                     <span>Explore Collections</span>
                     <span class="ml-2 relative h-6 w-8 overflow-hidden">
                         <svg class="font-black absolute right-0 w-6 h-6 text-cyan-400 transition-all duration-300 group-hover:translate-x-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" stroke-width="1.2" viewBox="0 0 16 16">

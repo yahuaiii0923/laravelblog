@@ -39,8 +39,18 @@ Route::get('/care', [PagesController::class, 'care'])->name('care');
 Route::get('/measure', [PagesController::class, 'measure'])->name('measure');
 Route::get('/gifting', [PagesController::class, 'gifting'])->name('gifting');
 
-// Comments
-Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+// Comments routes
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])
+     ->name('comments.store')
+     ->middleware('auth');
+
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])
+     ->name('comments.destroy')
+     ->middleware('auth');
+
+Route::post('/comments/{comment}/like', [CommentController::class, 'toggleLike'])
+     ->name('comments.like')
+     ->middleware('auth');
 
 // Authentication
 Auth::routes();

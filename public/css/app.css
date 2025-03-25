@@ -1885,6 +1885,9 @@ select {
 .h-60 {
   height: 15rem;
 }
+.h-4 {
+  height: 1rem;
+}
 .min-h-\[500px\] {
   min-height: 500px;
 }
@@ -1959,6 +1962,9 @@ select {
 }
 .w-56 {
   width: 14rem;
+}
+.w-4 {
+  width: 1rem;
 }
 .max-w-2xl {
   max-width: 42rem;
@@ -2459,6 +2465,9 @@ select {
 }
 .fill-current {
   fill: currentColor;
+}
+.fill-red-500 {
+  fill: #ef4444;
 }
 .object-contain {
   -o-object-fit: contain;
@@ -3121,6 +3130,10 @@ select {
 .hover\:text-cyan-800:hover {
   --tw-text-opacity: 1;
   color: rgb(21 94 117 / var(--tw-text-opacity));
+}
+.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 .hover\:underline:hover {
   text-decoration-line: underline;

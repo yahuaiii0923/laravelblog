@@ -61,9 +61,6 @@
                 <!-- Blog Content -->
                 <div class="p-6 pb-12 flex-1 overflow-hidden">
                     <h2 class="text-xl font-bold text-gray-800 mb-2">{{ $post->title }}</h2>
-                    @if($titleLength <= $maxTitleLength && $post->description)
-                        <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->description }}</p>
-                    @endif
                     <p class="text-gray-600 mb-4 line-clamp-2">{{ $post->excerpt }}</p>
                 </div>
             </a>

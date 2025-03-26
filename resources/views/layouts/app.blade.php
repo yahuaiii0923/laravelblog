@@ -11,20 +11,24 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-    <div id="app">
-        <header class="bg-blue-900 py-6">
+<body class="bg-white h-screen antialiased leading-none font-sans flex flex-col">
+    <div id="app" class="flex flex-col flex-grow">
+        <header class="bg-blue-50 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
-                <div>
-                    <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-                <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
+                <!-- Jellycat Logo -->
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('images/original.png') }}" alt="Jellycat Blog" class="h-12">
+                </a>
+
+                <nav class="space-x-4 text-cyan-400 text-sm sm:text-base">
+                    <a class="no-underline hover:underline" href="/">Home</a>
+                    <a class="no-underline hover:underline" href="/blog">Blog</a>
+                    <a class="nav-link" href="{{ route('matchmaker') }}">Plushie Matchmaker</a>
                     @guest
                         <a class="no-underline hover:underline" href="{{ route('login') }}">{{ __('Login') }}</a>
                         @if (Route::has('register'))
@@ -45,7 +49,13 @@
             </div>
         </header>
 
-        @yield('content')
+        <main class="flex-grow">
+            @yield('content')
+        </main>
+
+        @include('layouts.footer')
     </div>
+
+    @stack('scripts')
 </body>
 </html>

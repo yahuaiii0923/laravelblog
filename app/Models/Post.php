@@ -12,7 +12,17 @@ class Post extends Model
     use HasFactory;
     use Sluggable;
 
-    protected $fillable = ['title', 'slug', 'description', 'image_path', 'user_id'];
+    protected $fillable = [
+      'title',
+      'description',
+      'slug',
+      'content',
+      'user_id',
+    ];
+    protected $dates = [
+            'created_at',
+            'updated_at'
+        ];
 
     public function user()
     {
@@ -31,5 +41,21 @@ class Post extends Model
                 'source' => 'title',
             ],
         ];
+    }
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class);
+    }
+
+    //to get the first image
+    public function getFirstImageAttribute()
+    {
+        return $this->images->first();
+    }
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }

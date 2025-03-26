@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
+use App\Models\Post;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('manage-posts', function ($user) {
+            return $user->is_admin; //make sure user is an admin
+        });
+
+        View::composer('layouts.footer', function ($view) {
+                    $latestPosts = Post::latest()->take(4)->get();
+                    $view->with('latestPosts', $latestPosts);
+                });
     }
 }

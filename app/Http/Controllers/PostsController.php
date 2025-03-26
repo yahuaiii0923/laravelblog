@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
+use App\Models\PostImage;
+use Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image as ImageFacade;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostsController extends Controller
@@ -20,8 +26,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('blog.index')
-            ->with('posts', Post::orderBy('updated_at', 'DESC')->get());
+        return view('blog.listing')
+            ->with('posts', Post::with('images')->orderBy('updated_at', 'DESC')->get());
     }
 
     /**
@@ -43,25 +49,52 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048'
+            'title' => 'required|string|max:255',
+            'content' => 'required|string', // Changed back to 'content' to match form
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048'
         ]);
 
-        $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
 
-        $request->image->move(public_path('images'), $newImageName);
+        // Generate description from content (first 150 characters)
+        $description = substr(strip_tags($request->input('content')), 0, 150);
+        if (strlen(strip_tags($request->input('content'))) > 150) {
+            $description .= '...';
+        }
 
-        Post::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-            'image_path' => $newImageName,
-            'user_id' => auth()->user()->id
-        ]);
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been added!');
+        // Create post with both content and auto-generated description
+        $post = Post::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'description' => $description, // Auto-generated description
+                'slug' => $slug,
+                'user_id' => auth()->user()->id,
+            ]);
+
+        //stores images
+        if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $filename = time() . '_' . $image->getClientOriginalName();
+                    $path = $image->storeAs('posts', $filename, 'public');
+
+                    try {
+                        $img = ImageFacade::make($image->getRealPath());
+
+                        PostImage::create([
+                            'post_id' => $post->id,
+                            'image_path' => $path,
+                            'width' => $img->width(),
+                            'height' => $img->height()
+                        ]);
+                    } catch (\Exception $e) {
+                        dd('Image processing failed: ' . $e->getMessage());
+                    }
+                } // <-- Added closing brace for foreach
+            } // <-- Added closing brace for if
+
+        return redirect()->route('posts.show', $post->slug);
     }
 
     /**
@@ -70,11 +103,15 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
-    {
-        return view('blog.show')
-            ->with('post', Post::where('slug', $slug)->first());
-    }
+    // Show a single blog post
+        public function show($slug)
+        {
+            // Find the post by its slug
+            $post = Post::where('slug', $slug)->firstOrFail();
+
+            // Pass the post to the view
+            return view('blog.show', compact('post'));
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -97,21 +134,52 @@ class PostsController extends Controller
      */
     public function update(Request $request, $slug)
     {
+        $post = Post::where('slug', $slug)->firstOrFail();
+
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'images.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'delete_images' => 'sometimes|array'
         ]);
 
-        Post::where('slug', $slug)
-            ->update([
-                'title' => $request->input('title'),
-                'description' => $request->input('description'),
-                'slug' => SlugService::createSlug(Post::class, 'slug', $request->title),
-                'user_id' => auth()->user()->id
-            ]);
+        // Slug generation with conditional check
+        $slug = $post->title !== $request->title
+            ? SlugService::createSlug(Post::class, 'slug', $request->title)
+            : $post->slug;
 
-        return redirect('/blog')
-            ->with('message', 'Your post has been updated!');
+        $post->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'description' => substr(strip_tags($request->input('content')), 0, 150) . '...',
+            'slug' => $slug,
+        ]);
+
+        // Handle new images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $path = $image->storeAs('posts', $filename, 'public');
+
+                PostImage::create([
+                    'post_id' => $post->id,
+                    'image_path' => $path,
+                    'width' => ImageFacade::make($image)->width(),
+                    'height' => ImageFacade::make($image)->height()
+                ]);
+            }
+        }
+
+        // Handle deleted images
+        if ($request->has('delete_images')) {
+            $imagesToDelete = PostImage::whereIn('id', $request->delete_images)->get();
+            foreach ($imagesToDelete as $image) {
+                Storage::disk('public')->delete($image->image_path);
+                $image->delete();
+            }
+        }
+
+        return redirect()->route('blog.index')->with('message', 'Post updated successfully!');
     }
 
     /**
@@ -126,7 +194,19 @@ class PostsController extends Controller
         $post->delete();
 
         return redirect('/blog')
-            ->with('message', 'Your post has been deleted!');
+            ->with('message', 'Post deleted successfully!');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
+
+        $posts = Post::where('title', 'LIKE', "%{$query}%")
+                    ->with('user')
+                    ->paginate(10);
+
+        return view('blog.listing', compact('posts'));
+    }
+
 }
 

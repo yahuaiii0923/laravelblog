@@ -4,12 +4,6 @@
     <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/original/o/bashful-beige-bunny-banner__93776.original.jpg" alt="Jellycat Plushies" width="400" />
 </p>
 
-<p align="center">
-    <img src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"/> 
-    <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"/> 
-    <img src="https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
-</p>
-
 ---
 
 ## 🧸 Project Overview  

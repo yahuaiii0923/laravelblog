@@ -1,4 +1,4 @@
-# Jellycat Chronicles 
+# Jellycat Plushies Blog 🧸
 
 <p align="center">
     <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/original/o/bashful-beige-bunny-banner__93776.original.jpg" alt="Jellycat Plushies" width="full" />

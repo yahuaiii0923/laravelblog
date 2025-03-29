@@ -1,49 +1,85 @@
-## Laravel 8 Complete Blog
+# Jellycat Chronicles 
 
-This repository is linked to [this youtube video](https://www.youtube.com/watch?v=HKJDLXsTr8A&t=4710s) where I show you how to create a complete blog in Laravel 8 using best practices.
+<p align="center">
+    <img src="https://cdn11.bigcommerce.com/s-fz2bnmwg7y/images/stencil/original/o/bashful-beige-bunny-banner__93776.original.jpg" alt="Jellycat Plushies" width="400" />
+</p>
 
-•	Author: Code With Dary <br>
-•	Twitter: [@codewithdary](https://twitter.com/codewithdary) <br>
-•	Instagram: [@codewithdary](https://www.instagram.com/codewithdary/) <br>
+<p align="center">
+    <img src="https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"/> 
+    <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"/> 
+    <img src="https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
+</p>
 
-## Requirements
-•	PHP 7.3 or higher <br>
-•	Node 12.13.0 or higher <br>
+---
 
-## Usage <br>
-Setting up your development environment on your local machine: <br>
+## 🧸 Project Overview  
+A cozy Laravel blog celebrating Jellycat plushies! Features stories about:
+- 25th Anniversary Collection 🎂  
+- Halloween Amuseables 🎃  
+- Bartholomew Bear & Bashful Bunny friendship 🐻🐰  
+- Smudge Collection 🐘  
+
+Special feature: **Plushie Matchmaker** - personality-based plushie recommendations!
+
+---
+
+## ✨ Key Features  
+- **Interactive Comments** (Post, Like, Delete ❌)  
+- **Plushie Matchmaker Quiz** 🧩  
+- **SEO-Friendly Blog System**  
+- **Responsive Design** with Tailwind CSS  
+- **Image Handling** with Intervention Image  
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone the repo
+
 ```
-git clone git@github.com:codewithdary/laravel-8-complete-blog.git
-cd laravel-8-complete-blog
-cp .env.example .env
+git clone https://github.com/yahuaiii0923/laravelblog
+```
+
+### 2.Install Dependencies
+```
+# Install PHP packages (Laravel, Eloquent Sluggable, Intervention Image)
 composer install
+
+# Install JavaScript dependencies (Tailwind CSS, jQuery, etc.)
+npm install
+```
+
+### 3. Set up the environment file
+`.env` file is not included in the repository. You can create a new one by copying the example file.
+```
+cp .env.example .env
+```
+Generate a new application key.
+```
 php artisan key:generate
-php artisan cache:clear && php artisan config:clear
-php artisan serve
 ```
 
-## Before starting <br>
-Create a database <br>
-```
-mysql
-create database laravelblog;
-exit;
-```
-
-Setup your database credentials in the .env file <br>
+### 4. Set up the database
+This project uses MySQL. Create a new database and update the `.env` file with your database credentials.
+Replace `{your_database_name}`, `{your_username}`, and `{your_password}` with your own information.
+DB_USERNAME and DB_PASSWORD are the credentials for your MySQL database, usually set as root and an empty password by default.
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laravelblog
-DB_USERNAME={USERNAME}
-DB_PASSWORD={PASSWORD}
+DB_DATABASE={your_database_name}
+DB_USERNAME={your_username}
+DB_PASSWORD={your_password}
+``` 
+
+### 5. Run the migrations
+```
+php artisan migrate --seed
 ```
 
-Migrate the tables
+### 6. Serve the application
+Run the following command to start the Laravel development server.
 ```
-php artisan migrate
+php artisan serve
 ```
 
-## Contributing
-Do not hesitate to contribute to the project by adapting or adding features ! Bug reports or pull requests are welcome.
